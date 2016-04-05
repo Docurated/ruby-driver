@@ -295,12 +295,8 @@ module Cassandra
 
     Array(options.fetch(:hosts, '127.0.0.1')).each do |host|
       case host
-      when ::IPAddr
+      when ::IPAddr || ::String
         hosts << host
-      when ::String # ip address or hostname
-        Resolv.each_address(host) do |ip|
-          hosts << ::IPAddr.new(ip)
-        end
       else
         raise ::ArgumentError, ":hosts must be String or IPAddr, #{host.inspect} given"
       end
