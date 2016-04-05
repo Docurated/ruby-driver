@@ -473,7 +473,7 @@ module Cassandra
           raise Errors::InternalError, "Unable to fetch connected host's metadata" if local.empty?
 
           data = local.first
-          @registry.host_found(IPAddr.new(connection.host), data)
+          @registry.host_found(connection.host, data)
           @metadata.update(data)
 
           @logger.info("Completed refreshing connected host's metadata")
